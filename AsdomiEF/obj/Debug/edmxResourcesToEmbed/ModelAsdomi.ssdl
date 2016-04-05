@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="asdomiModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="asdomiModelStoreContainer">
+    <EntitySet Name="intervention" EntityType="asdomiModel.Store.intervention" store:Type="Tables" Schema="asdomi" />
+    <EntitySet Name="patient" EntityType="asdomiModel.Store.patient" store:Type="Tables" Schema="asdomi" />
+    <EntitySet Name="salarie" EntityType="asdomiModel.Store.salarie" store:Type="Tables" Schema="asdomi" />
+    <EntitySet Name="vehicule" EntityType="asdomiModel.Store.vehicule" store:Type="Tables" Schema="asdomi" />
+    <AssociationSet Name="FK_intervention_patient" Association="asdomiModel.Store.FK_intervention_patient">
+      <End Role="patient" EntitySet="patient" />
+      <End Role="intervention" EntitySet="intervention" />
+    </AssociationSet>
+    <AssociationSet Name="FK_intervention_salarie" Association="asdomiModel.Store.FK_intervention_salarie">
+      <End Role="salarie" EntitySet="salarie" />
+      <End Role="intervention" EntitySet="intervention" />
+    </AssociationSet>
+    <AssociationSet Name="FK_intervention_vehicule" Association="asdomiModel.Store.FK_intervention_vehicule">
+      <End Role="vehicule" EntitySet="vehicule" />
+      <End Role="intervention" EntitySet="intervention" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="intervention">
+    <Key>
+      <PropertyRef Name="numSalarie" />
+      <PropertyRef Name="dateIntervention" />
+      <PropertyRef Name="heureDebut" />
+    </Key>
+    <Property Name="numSalarie" Type="int" Nullable="false" />
+    <Property Name="dateIntervention" Type="date" Nullable="false" />
+    <Property Name="heureDebut" Type="time" Nullable="false" />
+    <Property Name="dureeIntervention" Type="int" />
+    <Property Name="nbKm" Type="int" />
+    <Property Name="numSS" Type="char" MaxLength="13" />
+    <Property Name="numVehicule" Type="int" />
+  </EntityType>
+  <EntityType Name="patient">
+    <Key>
+      <PropertyRef Name="numSS" />
+    </Key>
+    <Property Name="numSS" Type="char" Nullable="false" MaxLength="13" />
+    <Property Name="nomPatient" Type="char" MaxLength="20" />
+    <Property Name="prenomPatient" Type="char" MaxLength="15" />
+    <Property Name="ruePatient" Type="char" MaxLength="50" />
+    <Property Name="villePatient" Type="char" MaxLength="20" />
+    <Property Name="cpPatient" Type="char" MaxLength="5" />
+    <Property Name="datenaissPatient" Type="date" />
+  </EntityType>
+  <EntityType Name="salarie">
+    <Key>
+      <PropertyRef Name="numSalarie" />
+    </Key>
+    <Property Name="numSalarie" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nomSalarie" Type="char" MaxLength="20" />
+    <Property Name="prenomSalarie" Type="char" MaxLength="15" />
+    <Property Name="telSalarie" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="vehicule">
+    <Key>
+      <PropertyRef Name="numVehicule" />
+    </Key>
+    <Property Name="numVehicule" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="noImmat" Type="char" MaxLength="10" />
+    <Property Name="marque" Type="char" MaxLength="20" />
+    <Property Name="categorie" Type="char" MaxLength="5" />
+    <Property Name="dateAcquisition" Type="date" />
+  </EntityType>
+  <Association Name="FK_intervention_patient">
+    <End Role="patient" Type="asdomiModel.Store.patient" Multiplicity="0..1" />
+    <End Role="intervention" Type="asdomiModel.Store.intervention" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="patient">
+        <PropertyRef Name="numSS" />
+      </Principal>
+      <Dependent Role="intervention">
+        <PropertyRef Name="numSS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_intervention_salarie">
+    <End Role="salarie" Type="asdomiModel.Store.salarie" Multiplicity="1" />
+    <End Role="intervention" Type="asdomiModel.Store.intervention" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salarie">
+        <PropertyRef Name="numSalarie" />
+      </Principal>
+      <Dependent Role="intervention">
+        <PropertyRef Name="numSalarie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_intervention_vehicule">
+    <End Role="vehicule" Type="asdomiModel.Store.vehicule" Multiplicity="0..1" />
+    <End Role="intervention" Type="asdomiModel.Store.intervention" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicule">
+        <PropertyRef Name="numVehicule" />
+      </Principal>
+      <Dependent Role="intervention">
+        <PropertyRef Name="numVehicule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="asdomiModelStoreContainer" CdmEntityContainer="asdomiEntities">
+    <EntitySetMapping Name="intervention">
+      <EntityTypeMapping TypeName="asdomiModel.intervention">
+        <MappingFragment StoreEntitySet="intervention">
+          <ScalarProperty Name="numSalarie" ColumnName="numSalarie" />
+          <ScalarProperty Name="dateIntervention" ColumnName="dateIntervention" />
+          <ScalarProperty Name="heureDebut" ColumnName="heureDebut" />
+          <ScalarProperty Name="dureeIntervention" ColumnName="dureeIntervention" />
+          <ScalarProperty Name="nbKm" ColumnName="nbKm" />
+          <ScalarProperty Name="numSS" ColumnName="numSS" />
+          <ScalarProperty Name="numVehicule" ColumnName="numVehicule" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="patient">
+      <EntityTypeMapping TypeName="asdomiModel.patient">
+        <MappingFragment StoreEntitySet="patient">
+          <ScalarProperty Name="numSS" ColumnName="numSS" />
+          <ScalarProperty Name="nomPatient" ColumnName="nomPatient" />
+          <ScalarProperty Name="prenomPatient" ColumnName="prenomPatient" />
+          <ScalarProperty Name="ruePatient" ColumnName="ruePatient" />
+          <ScalarProperty Name="villePatient" ColumnName="villePatient" />
+          <ScalarProperty Name="cpPatient" ColumnName="cpPatient" />
+          <ScalarProperty Name="datenaissPatient" ColumnName="datenaissPatient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salarie">
+      <EntityTypeMapping TypeName="asdomiModel.salarie">
+        <MappingFragment StoreEntitySet="salarie">
+          <ScalarProperty Name="numSalarie" ColumnName="numSalarie" />
+          <ScalarProperty Name="nomSalarie" ColumnName="nomSalarie" />
+          <ScalarProperty Name="prenomSalarie" ColumnName="prenomSalarie" />
+          <ScalarProperty Name="telSalarie" ColumnName="telSalarie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vehicule">
+      <EntityTypeMapping TypeName="asdomiModel.vehicule">
+        <MappingFragment StoreEntitySet="vehicule">
+          <ScalarProperty Name="numVehicule" ColumnName="numVehicule" />
+          <ScalarProperty Name="noImmat" ColumnName="noImmat" />
+          <ScalarProperty Name="marque" ColumnName="marque" />
+          <ScalarProperty Name="categorie" ColumnName="categorie" />
+          <ScalarProperty Name="dateAcquisition" ColumnName="dateAcquisition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

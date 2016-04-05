@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="asdomiModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="asdomiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="intervention" EntityType="asdomiModel.intervention" />
+    <EntitySet Name="patient" EntityType="asdomiModel.patient" />
+    <EntitySet Name="salarie" EntityType="asdomiModel.salarie" />
+    <EntitySet Name="vehicule" EntityType="asdomiModel.vehicule" />
+    <AssociationSet Name="FK_intervention_patient" Association="asdomiModel.FK_intervention_patient">
+      <End Role="patient" EntitySet="patient" />
+      <End Role="intervention" EntitySet="intervention" />
+    </AssociationSet>
+    <AssociationSet Name="FK_intervention_salarie" Association="asdomiModel.FK_intervention_salarie">
+      <End Role="salarie" EntitySet="salarie" />
+      <End Role="intervention" EntitySet="intervention" />
+    </AssociationSet>
+    <AssociationSet Name="FK_intervention_vehicule" Association="asdomiModel.FK_intervention_vehicule">
+      <End Role="vehicule" EntitySet="vehicule" />
+      <End Role="intervention" EntitySet="intervention" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="intervention">
+    <Key>
+      <PropertyRef Name="numSalarie" />
+      <PropertyRef Name="dateIntervention" />
+      <PropertyRef Name="heureDebut" />
+    </Key>
+    <Property Name="numSalarie" Type="Int32" Nullable="false" />
+    <Property Name="dateIntervention" Type="DateTime" Nullable="false" />
+    <Property Name="heureDebut" Type="Time" Nullable="false" />
+    <Property Name="dureeIntervention" Type="Int32" />
+    <Property Name="nbKm" Type="Int32" />
+    <Property Name="numSS" Type="String" MaxLength="13" Unicode="false" FixedLength="false" />
+    <Property Name="numVehicule" Type="Int32" />
+    <NavigationProperty Name="vehicule" Relationship="asdomiModel.FK_intervention_vehicule" FromRole="intervention" ToRole="vehicule" />
+  </EntityType>
+  <EntityType Name="patient">
+    <Key>
+      <PropertyRef Name="numSS" />
+    </Key>
+    <Property Name="numSS" Type="String" Nullable="false" MaxLength="13" Unicode="false" FixedLength="false" />
+    <Property Name="nomPatient" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="prenomPatient" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="ruePatient" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="villePatient" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="cpPatient" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="datenaissPatient" Type="DateTime" />
+    <NavigationProperty Name="lesInterventions" Relationship="asdomiModel.FK_intervention_patient" FromRole="patient" ToRole="intervention" />
+  </EntityType>
+  <EntityType Name="salarie">
+    <Key>
+      <PropertyRef Name="numSalarie" />
+    </Key>
+    <Property Name="numSalarie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nomSalarie" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="prenomSalarie" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <Property Name="telSalarie" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="lesInterventions" Relationship="asdomiModel.FK_intervention_salarie" FromRole="salarie" ToRole="intervention" />
+  </EntityType>
+  <EntityType Name="vehicule">
+    <Key>
+      <PropertyRef Name="numVehicule" />
+    </Key>
+    <Property Name="numVehicule" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="noImmat" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="marque" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="categorie" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="dateAcquisition" Type="DateTime" />
+  </EntityType>
+  <Association Name="FK_intervention_patient">
+    <End Role="patient" Type="asdomiModel.patient" Multiplicity="0..1" />
+    <End Role="intervention" Type="asdomiModel.intervention" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="patient">
+        <PropertyRef Name="numSS" />
+      </Principal>
+      <Dependent Role="intervention">
+        <PropertyRef Name="numSS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_intervention_salarie">
+    <End Role="salarie" Type="asdomiModel.salarie" Multiplicity="1" />
+    <End Role="intervention" Type="asdomiModel.intervention" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salarie">
+        <PropertyRef Name="numSalarie" />
+      </Principal>
+      <Dependent Role="intervention">
+        <PropertyRef Name="numSalarie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_intervention_vehicule">
+    <End Role="vehicule" Type="asdomiModel.vehicule" Multiplicity="0..1" />
+    <End Role="intervention" Type="asdomiModel.intervention" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicule">
+        <PropertyRef Name="numVehicule" />
+      </Principal>
+      <Dependent Role="intervention">
+        <PropertyRef Name="numVehicule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
